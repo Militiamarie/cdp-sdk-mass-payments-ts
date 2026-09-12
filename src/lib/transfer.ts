@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { CdpClient } from '@coinbase/cdp-sdk';
 import { TransferParams, TransferResult } from '@/lib/types/transfer';
 import { getTokenAddresses, TokenKey } from '@/lib/constants';
 import GasliteDrop from '@/contracts/GasliteDrop.json';
@@ -22,14 +21,9 @@ import { encodeFunctionData } from 'viem';
 import { randomUUID } from 'crypto';
 import { publicClient } from '@/lib/viem';
 import { getNetworkConfig } from '@/lib/network';
+import { cdpClient } from '@/lib/cdp';
 
 const { network } = getNetworkConfig();
-
-const cdpClient = new CdpClient({
-  apiKeyId: process.env.CDP_API_KEY_ID,
-  apiKeySecret: process.env.CDP_API_KEY_SECRET,
-  walletSecret: process.env.CDP_WALLET_SECRET,
-});
 
 export async function executeTransfers(
   params: TransferParams
